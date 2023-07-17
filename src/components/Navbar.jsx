@@ -3,8 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-
-  const allUsers = useSelector((state)=> state.app.users)
+  const allUsers = useSelector((state) => state.app.users);
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
