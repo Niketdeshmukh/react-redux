@@ -41,7 +41,7 @@ const Reader = () => {
                 >
                   View
                 </button>
-                <Link to="#" className="card-link">
+                <Link to={`/edit/${ele.id}`} className="card-link">
                   Edit
                 </Link>
                 <Link onClick={()=>dispatch(deleteUser(ele.id))} className="card-link">

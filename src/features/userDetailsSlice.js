@@ -61,30 +61,30 @@ export const deleteUser = createAsyncThunk(
   }
 );
 
-//update action
-// export const updateUser = createAsyncThunk(
-//   "updateUser",
-//   async (data, { rejectWithValue }) => {
-//     console.log("updated data", data);
-//     const response = await fetch(
-//       `https://64b2d5ad38e74e386d559f63.mockapi.io/crud/${data.id}`,
-//       {
-//         method: "PUT",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(data),
-//       }
-//     );
+// update action
+export const updateUser = createAsyncThunk(
+  "updateUser",
+  async (data, { rejectWithValue }) => {
+    console.log("updated data", data);
+    const response = await fetch(
+      `https://64b2d5ad38e74e386d559f63.mockapi.io/crud/${data.id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    );
 
-//     try {
-//       const result = await response.json();
-//       return result;
-//     } catch (error) {
-//       return rejectWithValue(error);
-//     }
-//   }
-// );
+    try {
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
 
 export const userDetail = createSlice({
   name: "userDetail",
@@ -140,20 +140,19 @@ export const userDetail = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-
-    // [updateUser.pending]: (state) => {
-    //   state.loading = true;
-    // },
-    // [updateUser.fulfilled]: (state, action) => {
-    //   state.loading = false;
-    //   state.users = state.users.map((ele) =>
-    //     ele.id === action.payload.id ? action.payload : ele
-    //   );
-    // },
-    // [updateUser.rejected]: (state, action) => {
-    //   state.loading = false;
-    //   state.error = action.payload.message;
-    // },
+    [updateUser.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateUser.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.users = state.users.map((ele) =>
+        ele.id === action.payload.id ? action.payload : ele
+      );
+    },
+    [updateUser.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload.message;
+    },
   },
 });
 
