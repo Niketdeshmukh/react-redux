@@ -1,9 +1,20 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { searchUser } from "../features/userDetailsSlice";
 
 const Navbar = () => {
   const allUsers = useSelector((state) => state.app.users);
+
+  const dispatch = useDispatch();
+
+  const [searchData,setSearchData] = useState("");
+
+  useEffect(() => {
+    dispatch(searchUser(searchData));//searchData will go in action in reducer
+  }, [searchData]);
+  
+
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -35,14 +46,12 @@ const Navbar = () => {
             </ul>
             <form className="d-flex" role="search">
               <input
-                className="form-control me-2"
+                className="form-control me-5"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                onChange={(e)=>(setSearchData(e.target.value))}
               />
-              <button className="btn btn-outline-success" type="submit">
-                Search
-              </button>
             </form>
           </div>
         </div>
