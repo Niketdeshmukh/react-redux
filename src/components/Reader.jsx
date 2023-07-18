@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { showUser } from "../features/userDetailsSlice";
+import { deleteUser, showUser } from "../features/userDetailsSlice";
 import Modal from "./Modal";
 const Reader = () => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const Reader = () => {
                 <Link to="#" className="card-link">
                   Edit
                 </Link>
-                <Link to="#" className="card-link">
+                <Link onClick={()=>dispatch(deleteUser(ele.id))} className="card-link">
                   Delete
                 </Link>
               </div>
